@@ -33,7 +33,7 @@ task genJaxb {
 			mkdir(dir: classesDir)
 
 			xjc(destdir: sourcesDir, schema: schema,
-					package: "com.manifestcorp.onssoap.consumingwebservice.wsdl") {
+					package: "com.manifestcorp.onssoap.employee.wsdl") {
 				arg(value: "-wsdl")
 				produces(dir: sourcesDir, includes: "**/*.java")
 			}
