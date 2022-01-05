@@ -53,8 +53,25 @@ task genJaxb {
 		}
 	}
 }
-
-
+//task generateJavaClasses {
+//	System.setProperty('javax.xml.accessExternalSchema', 'all')
+//	def jaxbTargetDir = file("src/main/java/")
+//	doLast {
+//		jaxbTargetDir.mkdirs()
+//		ant.taskdef(
+//				name: 'xjc',
+//				classname: 'com.sun.tools.xjc.XJCTask',
+//				classpath: configurations.jaxb.asPath
+//		)
+//		ant.jaxbTargetDir = jaxbTargetDir
+//		ant.xjc(
+//				destdir: '${jaxbTargetDir}',
+//				package: 'simplesolution.dev',
+//				schema: 'src/main/resources/employee.wsdl',
+//				language: 'WSDL'
+//		)
+//	}
+//}
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation ('org.springframework.boot:spring-boot-starter-web-services') {
@@ -63,10 +80,15 @@ dependencies {
 	implementation 'org.springframework.ws:spring-ws-core'	//implementation group: 'org.springframework', name: 'spring-jms', version: '5.3.14'
 	implementation 'com.ibm.mq:mq-jms-spring-boot-starter:2.5.0'
 	implementation 'org.glassfish.jaxb:jaxb-runtime'
+	jaxb (
+			'com.sun.xml.bind:jaxb-core:2.3.0.1',
+			'com.sun.xml.bind:jaxb-xjc:2.3.2',
+			'com.sun.xml.bind:jaxb-impl:2.3.2'
+	)
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 // For Java 11:
-//	implementation(files(genJaxb.classesDir).builtBy(genJaxb))
+//implementation(files(genJaxb.classesDir).builtBy(genJaxb))
 //
 //	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
 
